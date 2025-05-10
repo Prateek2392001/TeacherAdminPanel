@@ -1,12 +1,8 @@
 import React, { useState } from "react";
-import Sidebar from "./components/Sidebar/Sidebar";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Outlet,
-} from "react-router-dom";
+
 import Header from "./components/Header/Header";
+import { Outlet } from "react-router-dom";
+import Sidebar from "./components/Sidebar/Sidebar";
 
 const App = () => {
   const [open, setOpen] = useState(false);
