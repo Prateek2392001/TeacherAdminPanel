@@ -1,13 +1,11 @@
 import { createRoot } from "react-dom/client";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./assets/style.css";
-import App from "./App.jsx";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-// import StudentList from "./components/Students/StudentList.jsx";
-
 import Dashboard from "./components/Dashboard/Dashboard.jsx";
 import SignIn from "./components/SignIn/SignIn.jsx";
 import CoursesList from "./components/Courses/CoursesList.jsx";
+import App from "./App.jsx";
+import "./assets/style.css";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 const router = createBrowserRouter([
   {
     path: "/",
