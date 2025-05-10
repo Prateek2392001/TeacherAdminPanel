@@ -16,7 +16,7 @@ import ViewModal from "./ViewModal/ViewModal";
 import UpdateCourse from "./Modal/UpdateCourse";
 import { api } from "../api";
 
-const Courses = () => {
+const CoursesList = () => {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -294,4 +294,4 @@ const Courses = () => {
   );
 };
 
-export default Courses;
+export default CoursesList;
