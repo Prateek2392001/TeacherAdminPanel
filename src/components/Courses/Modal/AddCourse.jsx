@@ -139,6 +139,7 @@ const AddCourse = ({ show, handleClose, refreshList }) => {
               name="description"
               value={formData.description}
               onChange={handleChange}
+              style={{ overflow: "hidden", resize: "none" }}
               required
             />
           </Form.Group>

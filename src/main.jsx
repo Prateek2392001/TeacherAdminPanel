@@ -6,6 +6,7 @@ import CoursesList from "./components/Courses/CoursesList.jsx";
 import App from "./App.jsx";
 import "./assets/style.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Attendance from "./components/Attendance/Attendance.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -14,6 +15,7 @@ const router = createBrowserRouter([
       { path: "/dashboard", element: <Dashboard /> },
       // { path: "/studentlist", element: <StudentList /> },
       { path: "/courseslist", element: <CoursesList /> },
+      { path: "/attendance", element: <Attendance /> },
     ],
   },
   {

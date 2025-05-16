@@ -28,6 +28,12 @@ const Sidebar = ({ open }) => {
               <span className="menu-title">Courses List</span>
             </Link>
           </li>
+          <li className="nav-item">
+            <Link to={"/attendance"} className="nav-link">
+              <i className="bi bi-calendar-check mx-2 fw-bold"></i>
+              <span className="menu-title">Student Attendance</span>
+            </Link>
+          </li>
           {/* <li className="nav-item">
             <Link to={"/coursevideo"} className="nav-link">
               <i className="bi bi-person-badge mx-2 fw-bold"></i>
