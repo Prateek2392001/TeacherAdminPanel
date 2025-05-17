@@ -31,37 +31,6 @@ const CoursesList = () => {
   const [selectedCourseID, setSelectedCourseID] = useState(null);
   // const [showDescriptionModal, setShowDescriptionModal] = useState(false);
   // const [selectedDescription, setSelectedDescription] = useState("");
-  // const token = Cookies.get("InstructorToken");
-  // if (!token) {
-  //   setError("Unauthorized: No Token found.");
-  //   setLoading(false);
-  //   return;
-  // }
-
-  // useEffect(() => {
-  //   fetchCourses();
-  // }, []);
-
-  // const fetchCourses = async () => {
-  //   try {
-  //     const response = await axios.get(`${api}/instructor/courses`, {
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     });
-  //     if (response.data?.status === 1 && Array.isArray(response.data.data)) {
-  //       setCourses(response.data.data);
-  //     } else {
-  //       setCourses([]);
-  //       setError("Failed to fetch courses.");
-  //     }
-  //   } catch (err) {
-  //     setError("Error fetching courses.");
-  //     console.error("API Error:", err);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
 
   useEffect(() => {
     const token = Cookies.get("InstructorToken");
@@ -108,10 +77,6 @@ const CoursesList = () => {
   //   setSelectedCourse(course);
   //   setShowDeleteModal(true);
   // };
-
-  // const filteredCourses = courses.filter((course) =>
-  //   course.name.toLowerCase().includes(searchTerm.toLowerCase())
-  // );
 
   const filteredCourses = courses.filter((course) =>
     course.name?.toLowerCase().includes(searchTerm.toLowerCase())
@@ -169,7 +134,6 @@ const CoursesList = () => {
                     <th>⭐ Rating</th>
                     <th>👥 Rating Count</th>
                     <th>🎥 Media</th>
-                    {/* <th>👤 Created By</th> */}
                     <th>⚙️ Action</th>
                   </tr>
                 </thead>
@@ -197,15 +161,6 @@ const CoursesList = () => {
                         >
                           {course.description}
                         </td>
-                        {/* <td>
-                          <img
-                            src={course.thumbnail}
-                            alt="Course Thumbnail"
-                            width="100"
-                            height="70"
-                            className="rounded"
-                          />
-                        </td> */}
                         {course.thumbnail ? (
                           <img
                             src={course.thumbnail}
@@ -230,7 +185,6 @@ const CoursesList = () => {
                             <FaEye /> View
                           </Button>
                         </td>
-                        {/* <td>{course.createdBy || "N/A"}</td> */}
                         <td>
                           <Button
                             variant="warning"

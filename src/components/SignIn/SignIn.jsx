@@ -41,7 +41,7 @@ const SignIn = () => {
         const { token } = response.data;
         Cookies.set("InstructorToken", token, { expires: 7 });
 
-        navigate("/dashboard");
+        navigate("/");
       } else {
         setError("Invalid Email or Password");
       }
