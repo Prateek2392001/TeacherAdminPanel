@@ -1,7 +1,7 @@
-// src/components/Modal/ViewAttendanceModal.jsx
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { api } from "../../api";
 
 const ViewAttendanceModal = ({ show, onClose, student }) => {
   const [records, setRecords] = useState([]);
@@ -13,7 +13,7 @@ const ViewAttendanceModal = ({ show, onClose, student }) => {
       try {
         const token = Cookies.get("InstructorToken");
         const res = await axios.get(
-          `https://educationapp-2v1l.onrender.com/api/instructor/attendance/student?studentId=${student.studentId}`,
+          `${api}/instructor/attendance/student?studentId=${student.studentId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

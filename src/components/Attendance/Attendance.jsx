@@ -1,135 +1,10 @@
-// import React, { useEffect, useState } from "react";
-// import axios from "axios";
-// import Cookies from "js-cookie";
-// import AttendanceForm from "./Modal/AttendanceForm";
-// import CreateAttendanceForm from "./Modal/CreateAttendanceForm";
-
-// const Attendance = () => {
-//   const [students, setStudents] = useState([]);
-//   const [selectedStudent, setSelectedStudent] = useState(null);
-//   const [showMarkModal, setShowMarkModal] = useState(false);
-//   const [showCreateModal, setShowCreateModal] = useState(false);
-
-//   useEffect(() => {
-//     const fetchEnrolledStudents = async () => {
-//       try {
-//         const token = Cookies.get("InstructorToken");
-//         const response = await axios.get(
-//           "https://educationapp-2v1l.onrender.com/api/instructor/enrolled-students",
-//           {
-//             headers: {
-//               Authorization: `Bearer ${token}`,
-//             },
-//           }
-//         );
-
-//         if (response.data.status === 1) {
-//           setStudents(response.data.data);
-//         }
-//       } catch (error) {
-//         console.error("Error fetching students:", error);
-//       }
-//     };
-
-//     fetchEnrolledStudents();
-//   }, []);
-
-//   const handleMarkAttendanceClick = (student) => {
-//     setSelectedStudent(student);
-//     setShowMarkModal(true);
-//   };
-
-//   const handleCreateAttendanceClick = (student) => {
-//     setSelectedStudent(student);
-//     setShowCreateModal(true);
-//   };
-
-//   const closeModals = () => {
-//     setSelectedStudent(null);
-//     setShowMarkModal(false);
-//     setShowCreateModal(false);
-//   };
-
-//   return (
-//     <div className="container mt-4">
-//       <h3 className="mb-3">Enrolled Students</h3>
-//       <div className="table-responsive">
-//         <table className="table table-bordered table-striped">
-//           <thead>
-//             <tr>
-//               <th>Name</th>
-//               <th>Email</th>
-//               <th>Contact</th>
-//               <th>Enrolled Courses</th>
-//               <th>Action</th>
-//             </tr>
-//           </thead>
-//           <tbody>
-//             {students.length === 0 ? (
-//               <tr>
-//                 <td colSpan="5" className="text-center">
-//                   Loading...
-//                 </td>
-//               </tr>
-//             ) : (
-//               students.map((student) => (
-//                 <tr key={student.studentId}>
-//                   <td>{student.name}</td>
-//                   <td>{student.email}</td>
-//                   <td>{student.contact}</td>
-//                   <td>
-//                     {student.enrolledCourses
-//                       .map((course) => course.courseName)
-//                       .join(", ")}
-//                   </td>
-//                   <td className="d-flex gap-2">
-//                     <button
-//                       className="btn btn-primary btn-sm"
-//                       onClick={() => handleMarkAttendanceClick(student)}
-//                     >
-//                       Mark Attendance
-//                     </button>
-//                     {!student.hasAttendance && (
-//                       <button
-//                         className="btn btn-success btn-sm"
-//                         onClick={() => handleCreateAttendanceClick(student)}
-//                       >
-//                         Create Attendance
-//                       </button>
-//                     )}
-//                   </td>
-//                 </tr>
-//               ))
-//             )}
-//           </tbody>
-//         </table>
-//       </div>
-
-//       {/* Mark Attendance Modal */}
-//       <AttendanceForm
-//         show={showMarkModal}
-//         onClose={closeModals}
-//         student={selectedStudent}
-//       />
-
-//       {/* Create Attendance Modal */}
-//       <CreateAttendanceForm
-//         show={showCreateModal}
-//         onClose={closeModals}
-//         student={selectedStudent}
-//       />
-//     </div>
-//   );
-// };
-
-// export default Attendance;
-
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import AttendanceForm from "./Modal/AttendanceForm";
 import CreateAttendanceForm from "./Modal/CreateAttendanceForm";
 import ViewAttendanceModal from "./Modal/ViewAttendanceModal";
+import { api } from "../api";
 
 const Attendance = () => {
   const [students, setStudents] = useState([]);
@@ -143,7 +18,7 @@ const Attendance = () => {
       try {
         const token = Cookies.get("InstructorToken");
         const response = await axios.get(
-          "https://educationapp-2v1l.onrender.com/api/instructor/enrolled-students",
+          `${api}/instructor/enrolled-students`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -216,8 +91,9 @@ const Attendance = () => {
                       .map((course) => course.courseName)
                       .join(", ")}
                   </td>
+
                   <td className="d-flex gap-2 flex-wrap">
-                    {!student.hasAttendance && (
+                    {student.attendance && (
                       <button
                         className="btn btn-success btn-sm"
                         onClick={() => handleCreateAttendanceClick(student)}
