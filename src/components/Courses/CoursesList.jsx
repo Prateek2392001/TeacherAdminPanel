@@ -31,18 +31,49 @@ const CoursesList = () => {
   const [selectedCourseID, setSelectedCourseID] = useState(null);
   // const [showDescriptionModal, setShowDescriptionModal] = useState(false);
   // const [selectedDescription, setSelectedDescription] = useState("");
-  const token = Cookies.get("InstructorToken");
-  if (!token) {
-    setError("Unauthorized: No Token found.");
-    setLoading(false);
-    return;
-  }
+  // const token = Cookies.get("InstructorToken");
+  // if (!token) {
+  //   setError("Unauthorized: No Token found.");
+  //   setLoading(false);
+  //   return;
+  // }
+
+  // useEffect(() => {
+  //   fetchCourses();
+  // }, []);
+
+  // const fetchCourses = async () => {
+  //   try {
+  //     const response = await axios.get(`${api}/instructor/courses`, {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     });
+  //     if (response.data?.status === 1 && Array.isArray(response.data.data)) {
+  //       setCourses(response.data.data);
+  //     } else {
+  //       setCourses([]);
+  //       setError("Failed to fetch courses.");
+  //     }
+  //   } catch (err) {
+  //     setError("Error fetching courses.");
+  //     console.error("API Error:", err);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
   useEffect(() => {
-    fetchCourses();
+    const token = Cookies.get("InstructorToken");
+    if (!token) {
+      setError("Unauthorized: No Token found.");
+      setLoading(false);
+    } else {
+      fetchCourses(token);
+    }
   }, []);
 
-  const fetchCourses = async () => {
+  const fetchCourses = async (token) => {
     try {
       const response = await axios.get(`${api}/instructor/courses`, {
         headers: {
@@ -78,8 +109,12 @@ const CoursesList = () => {
   //   setShowDeleteModal(true);
   // };
 
+  // const filteredCourses = courses.filter((course) =>
+  //   course.name.toLowerCase().includes(searchTerm.toLowerCase())
+  // );
+
   const filteredCourses = courses.filter((course) =>
-    course.name.toLowerCase().includes(searchTerm.toLowerCase())
+    course.name?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -162,7 +197,7 @@ const CoursesList = () => {
                         >
                           {course.description}
                         </td>
-                        <td>
+                        {/* <td>
                           <img
                             src={course.thumbnail}
                             alt="Course Thumbnail"
@@ -170,7 +205,19 @@ const CoursesList = () => {
                             height="70"
                             className="rounded"
                           />
-                        </td>
+                        </td> */}
+                        {course.thumbnail ? (
+                          <img
+                            src={course.thumbnail}
+                            alt="Course Thumbnail"
+                            width="100"
+                            height="70"
+                            className="rounded"
+                          />
+                        ) : (
+                          <span className="text-muted">No image</span>
+                        )}
+
                         <td>{course.courseDuration} min</td>
                         <td>{course.rating}</td>
                         <td>{course.ratingCount}</td>
