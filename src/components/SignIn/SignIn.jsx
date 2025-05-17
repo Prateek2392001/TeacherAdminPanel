@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { api } from "../api";
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -12,6 +14,7 @@ const SignIn = () => {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   // const [courses, setCourses] = useState([]); // To store course data
 
   // Handle input change
@@ -29,13 +32,10 @@ const SignIn = () => {
     setError("");
 
     try {
-      const response = await axios.post(
-        "https://educationapp-2v1l.onrender.com/api/instructor/login", // API URL for instructor login
-        {
-          email: formData.email,
-          password: formData.password,
-        }
-      );
+      const response = await axios.post(`${api}/instructor/login`, {
+        email: formData.email,
+        password: formData.password,
+      });
 
       if (response.data.status === 1) {
         const { token } = response.data;
@@ -71,11 +71,10 @@ const SignIn = () => {
               required
             />
           </div>
-
-          <div className="mb-3">
+          <div className="mb-3 position-relative">
             <label className="form-label fw-bold">Password</label>
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               name="password"
               className="form-control"
               placeholder="Enter your password"
@@ -83,6 +82,18 @@ const SignIn = () => {
               onChange={handleChange}
               required
             />
+            <span
+              onClick={() => setShowPassword(!showPassword)}
+              style={{
+                position: "absolute",
+                right: "10px",
+                top: "35px",
+                cursor: "pointer",
+                color: "#888",
+              }}
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </span>
           </div>
 
           <div className="mb-3 d-flex justify-content-between align-items-center">
