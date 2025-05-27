@@ -7,7 +7,7 @@ const Header = ({ handleOpen, open }) => {
       <div className="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
         <div className="me-3"></div>
         <div>
-          <a className="navbar-brand" href="/dashboard">
+          <a className="navbar-brand" href="/">
             <img
               src="./image.png "
               className="main-logo rounded-circle h-50  w-80"
